@@ -1,7 +1,6 @@
 target
 *.jar
 *.stamp
-/vsim
-/verisim
 *.swp
+generated-src/
 .idea
