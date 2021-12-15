@@ -16,9 +16,9 @@ SCALA_SOURCES = $(foreach pkg,$(ALL_PACKAGES),$(call lookup_scala_srcs,$(base_di
 # create firrtl jar
 #########################################################################################
 $(FIRRTL_JAR): $(call lookup_scala_srcs, $(ROCKETCHIP_DIR)/firrtl/src/main/scala)
-	$(MAKE) -C $(ROCKETCHIP_DIR)/firrtl SBT="$(SBT)" root_dir=$(ROCKETCHIP_DIR)/firrtl build-scala
-	mkdir -p $(ROCKETCHIP_DIR)/lib
-	cp -p $(FIRRTL_JAR) $(ROCKETCHIP_DIR)/lib
+	# $(MAKE) -C $(ROCKETCHIP_DIR)/firrtl SBT="$(SBT)" root_dir=$(ROCKETCHIP_DIR)/firrtl build-scala
+	# mkdir -p $(ROCKETCHIP_DIR)/lib
+	# cp -p $(FIRRTL_JAR) $(ROCKETCHIP_DIR)/lib
 
 #########################################################################################
 # create firrtl file

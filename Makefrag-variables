@@ -51,8 +51,10 @@ SBT ?= java $(JAVA_ARGS) -jar $(ROCKETCHIP_DIR)/sbt-launch.jar ++2.12.10
 #########################################################################################
 # firrtl variables
 #########################################################################################
-FIRRTL_JAR ?= $(ROCKETCHIP_DIR)/firrtl/utils/bin/firrtl.jar
+FIRRTL_JAR ?= $(base_dir)/firrtl/utils/bin/firrtl.jar
 FIRRTL ?= java $(JAVA_ARGS) -cp "$(FIRRTL_JAR)":"$(ROCKET_CLASSES)" firrtl.stage.FirrtlMain
+ROCKET_CHIP_JAR = $(ROCKETCHIP_DIR)/rocketchip.jar
+FIRRTL = java $(JAVA_ARGS) -cp $(ROCKET_CHIP_JAR) firrtl.stage.FirrtlMain
 EXTRA_FIRRTL_ARGS ?=
 
 #########################################################################################
