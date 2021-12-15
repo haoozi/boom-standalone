@@ -12,11 +12,17 @@ EXTRA_PACKAGES ?=
 ALL_PACKAGES = $(BASE_PACKAGES) $(EXTRA_PACKAGES)
 SCALA_SOURCES = $(foreach pkg,$(ALL_PACKAGES),$(call lookup_scala_srcs,$(base_dir)/$(pkg)/src/main/scala))
 
+#########################################################################################
+# # create rocketchip jar
+#########################################################################################
+$(ROCKET_CHIP_JAR): $(call lookup_scala_srcs, $(ROCKETCHIP_DIR)/firrtl/src/main/scala)
+	cd $(ROCKETCHIP_DIR) && $(SBT) assembly
+
 
 #########################################################################################
 # create firrtl file
 #########################################################################################
-$(FIRRTL_FILE): $(SCALA_SOURCES) $(bootrom_img)
+$(FIRRTL_FILE): $(SCALA_SOURCES) $(ROCKET_CHIP_JAR) $(bootrom_img)
 	mkdir -p $(build_dir)
 	# Copy missing files
 	cp $(base_dir)/src/* $(base_dir)/riscv-boom/src/main/scala/
