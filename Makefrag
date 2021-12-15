@@ -25,6 +25,8 @@ $(FIRRTL_JAR): $(call lookup_scala_srcs, $(ROCKETCHIP_DIR)/firrtl/src/main/scala
 #########################################################################################
 $(FIRRTL_FILE): $(SCALA_SOURCES) $(FIRRTL_JAR) $(bootrom_img)
 	mkdir -p $(build_dir)
+	# Copy missing files
+	cp $(base_dir)/src/* $(base_dir)/riscv-boom/src/main/scala/
 	# cd $(base_dir) && $(SBT) "runMain $(PROJECT).Generator $(CHISEL_ARGS) $(build_dir) $(PROJECT) $(MODEL) $(CFG_PROJECT) $(CONFIG)"
 	cd $(base_dir) && $(SBT) "runMain $(PROJECT).Generator $(CHISEL_ARGS) -td $(build_dir) -T freechips.rocketchip.system.TestHarness -C $(CFG_PROJECT).$(CONFIG)"
 
