@@ -12,22 +12,14 @@ EXTRA_PACKAGES ?=
 ALL_PACKAGES = $(BASE_PACKAGES) $(EXTRA_PACKAGES)
 SCALA_SOURCES = $(foreach pkg,$(ALL_PACKAGES),$(call lookup_scala_srcs,$(base_dir)/$(pkg)/src/main/scala))
 
-#########################################################################################
-# create firrtl jar
-#########################################################################################
-$(FIRRTL_JAR): $(call lookup_scala_srcs, $(ROCKETCHIP_DIR)/firrtl/src/main/scala)
-	# $(MAKE) -C $(ROCKETCHIP_DIR)/firrtl SBT="$(SBT)" root_dir=$(ROCKETCHIP_DIR)/firrtl build-scala
-	# mkdir -p $(ROCKETCHIP_DIR)/lib
-	# cp -p $(FIRRTL_JAR) $(ROCKETCHIP_DIR)/lib
 
 #########################################################################################
 # create firrtl file
 #########################################################################################
-$(FIRRTL_FILE): $(SCALA_SOURCES) $(FIRRTL_JAR) $(bootrom_img)
+$(FIRRTL_FILE): $(SCALA_SOURCES) $(bootrom_img)
 	mkdir -p $(build_dir)
 	# Copy missing files
 	cp $(base_dir)/src/* $(base_dir)/riscv-boom/src/main/scala/
-	# cd $(base_dir) && $(SBT) "runMain $(PROJECT).Generator $(CHISEL_ARGS) $(build_dir) $(PROJECT) $(MODEL) $(CFG_PROJECT) $(CONFIG)"
 	cd $(base_dir) && $(SBT) "runMain $(PROJECT).Generator $(CHISEL_ARGS) -td $(build_dir) -T freechips.rocketchip.system.TestHarness -C $(CFG_PROJECT).$(CONFIG)"
 
 #########################################################################################

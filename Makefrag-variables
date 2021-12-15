@@ -18,6 +18,7 @@ endif
 # 	CFG_PROJECT = the scala package to find the CONFIG class
 #########################################################################################
 PROJECT ?= boom.system
+ROCKET_PROJECT ?= freechips.rocketchip.system
 MODEL ?= TestHarness
 CONFIG ?= LargeBoomConfig
 CFG_PROJECT ?= $(PROJECT)
@@ -32,7 +33,7 @@ ROCKET_CLASSES ?= "$(ROCKETCHIP_DIR)/target/scala-2.12/classes:$(ROCKETCHIP_DIR)
 #########################################################################################
 # names of different files used to compile
 #########################################################################################
-long_name = $(PROJECT).$(MODEL).$(CONFIG)
+long_name = $(ROCKET_PROJECT).$(CONFIG)
 FIRRTL_FILE = $(build_dir)/$(long_name).fir
 ANNO_FILE = $(build_dir)/$(long_name).anno.json
 VERILOG_FILE = $(build_dir)/$(long_name).v
@@ -51,8 +52,6 @@ SBT ?= java $(JAVA_ARGS) -jar $(ROCKETCHIP_DIR)/sbt-launch.jar ++2.12.10
 #########################################################################################
 # firrtl variables
 #########################################################################################
-FIRRTL_JAR ?= $(base_dir)/firrtl/utils/bin/firrtl.jar
-FIRRTL ?= java $(JAVA_ARGS) -cp "$(FIRRTL_JAR)":"$(ROCKET_CLASSES)" firrtl.stage.FirrtlMain
 ROCKET_CHIP_JAR = $(ROCKETCHIP_DIR)/rocketchip.jar
 FIRRTL = java $(JAVA_ARGS) -cp $(ROCKET_CHIP_JAR) firrtl.stage.FirrtlMain
 EXTRA_FIRRTL_ARGS ?=
