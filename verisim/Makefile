@@ -35,7 +35,7 @@ sim_fsdb_debug = $(sim_dir)/simulator-$(PROJECT)-$(CONFIG)-fsdb-debug
 default: $(sim)
 debug: $(sim_debug)
 fsdb_debug: $(sim_fsdb_debug)
-
+firrtl: $(FIRRTL_FILE)
 sim_csrcs += \
 	$(base_dir)/rocket-chip/src/main/resources/csrc/emulator.cc
 
