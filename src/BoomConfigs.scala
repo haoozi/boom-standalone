@@ -33,3 +33,7 @@ class DualSmallBoomConfig extends Config(
   new WithCoherentBusTopology ++
   new freechips.rocketchip.system.BaseConfig)
 
+class QuadMegaBoomConfig extends Config(
+  new boom.common.WithNMegaBooms(4) ++                          // 4 mega boom cores
+  new WithCoherentBusTopology ++
+  new freechips.rocketchip.system.BaseConfig)
