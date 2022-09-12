@@ -5,7 +5,7 @@
 #########################################################################################
 # build and install our own Verilator, to work around versioning issues.
 #########################################################################################
-VERILATOR_VERSION=4.210
+VERILATOR_VERSION=4.226
 VERILATOR_SRCDIR=verilator/src/verilator-$(VERILATOR_VERSION)
 INSTALLED_VERILATOR=$(abspath verilator/install/bin/verilator)
 
@@ -21,17 +21,16 @@ $(VERILATOR_SRCDIR)/bin/verilator: $(VERILATOR_SRCDIR)/Makefile
 
 $(VERILATOR_SRCDIR)/Makefile: $(VERILATOR_SRCDIR)/configure
 	mkdir -p $(dir $@)
-	cd $(dir $@) && ./configure --prefix=$(abspath verilator/install)
+	cd $(dir $@) && autoconf && ./configure --prefix=$(abspath verilator/install)
 
-$(VERILATOR_SRCDIR)/configure: verilator/verilator-$(VERILATOR_VERSION).tar.gz
+$(VERILATOR_SRCDIR)/configure: verilator/verilator-$(VERILATOR_VERSION).zip
 	rm -rf $(dir $@)
 	mkdir -p $(dir $@)
-	cat $^ | tar -xz --strip-components=1 -C $(dir $@)
-	touch $@
+	unzip -q $^ -d $(dir $(VERILATOR_SRCDIR))
 
-verilator/verilator-$(VERILATOR_VERSION).tar.gz:
+verilator/verilator-$(VERILATOR_VERSION).zip:
 	mkdir -p $(dir $@)
-	wget http://www.veripool.org/ftp/verilator-$(VERILATOR_VERSION).tgz -O $@
+	wget https://github.com/verilator/verilator/archive/refs/tags/v$(VERILATOR_VERSION).zip -O $@
 
 # Run Verilator to produce a fast binary to emulate this circuit.
 VERILATOR := $(INSTALLED_VERILATOR) --cc --exe
