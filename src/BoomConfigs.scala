@@ -48,6 +48,12 @@ class HexaSmallBoomConfig extends Config(
   new WithCoherentBusTopology ++
   new freechips.rocketchip.system.BaseConfig)
 
+class OctaSmallBoomConfig extends Config(
+  new boom.common.WithNSmallBooms(8) ++                          // 8 small boom cores
+  new WithCoherentBusTopology ++
+  new freechips.rocketchip.system.BaseConfig)
+
+
 class DualLargeBoomConfig extends Config(
    new boom.common.WithNLargeBooms(2) ++                          // 2 large boom cores
    new WithCoherentBusTopology ++
@@ -63,6 +69,12 @@ class HexaLargeBoomConfig extends Config(
    new WithCoherentBusTopology ++
    new freechips.rocketchip.system.BaseConfig)
 
+class OctaLargeBoomConfig extends Config(
+   new boom.common.WithNLargeBooms(8) ++                          // 8 large boom cores
+   new WithCoherentBusTopology ++
+   new freechips.rocketchip.system.BaseConfig)
+
+
 class DualMegaBoomConfig extends Config(
    new boom.common.WithNMegaBooms(2) ++                          // 2 mega boom cores
    new WithCoherentBusTopology ++
@@ -77,6 +89,14 @@ class HexaMegaBoomConfig extends Config(
    new boom.common.WithNMegaBooms(6) ++                          // 6 mega boom cores
    new WithCoherentBusTopology ++
    new freechips.rocketchip.system.BaseConfig)
+
+
+class OctaMegaBoomConfig extends Config(
+   new boom.common.WithNMegaBooms(8) ++                          // 8 mega boom cores
+   new WithCoherentBusTopology ++
+   new freechips.rocketchip.system.BaseConfig)
+
+
 
 class DualGigaBoomConfig extends Config(
   new boom.common.WithNGigaBooms(2) ++                           // 2 giga boom
